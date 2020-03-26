@@ -1,6 +1,6 @@
 from swapper import swappable_setting
 
-from .base.models import AbstractNotification, notify_handler  # noqa
+from .base.models import AbstractNotification, AbstractNotificationTemplate, notify_handler  # noqa
 
 
 class Notification(AbstractNotification):
@@ -21,3 +21,10 @@ class Notification(AbstractNotification):
     def naturaltime(self):
         from django.contrib.humanize.templatetags.humanize import naturaltime
         return naturaltime(self.timestamp)
+
+
+class NotificationTemplate(AbstractNotificationTemplate):
+
+    class Meta(AbstractNotificationTemplate.Meta):
+        abstract = False
+        swappable = swappable_setting('notifications', 'NotificationTemplate')

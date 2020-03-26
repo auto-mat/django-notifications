@@ -312,6 +312,17 @@ class AbstractNotification(models.Model):
             return self.target_object_id
 
 
+class AbstractNotificationTemplate(models.Model):
+    verb = models.CharField(max_length=255)
+    url = models.CharField(max_length=255)
+    icon = models.FileField(max_length=255)
+    slug = models.CharField(max_length=60, unique=True)
+
+    class Meta:
+        abstract = True
+        app_label = 'notifications'
+
+
 def notify_handler(verb, **kwargs):
     """
     Handler function to create Notification instance upon action signal call.
