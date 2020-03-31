@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.helpers import ActionForm
-from django.utils.translation import gettext_lazy
+from django.utils.translation import gettext_lazy, ugettext_lazy as _
 from notifications.base.admin import AbstractNotificationAdmin
 from swapper import load_model
 
