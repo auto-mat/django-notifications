@@ -3,7 +3,7 @@
 from django import forms
 from django.contrib import admin
 from django.contrib.admin.helpers import ActionForm
-from django.utils.translation import gettext_lazy, ugettext_lazy as _
+from django.utils.translation import gettext_lazy
 from notifications.base.admin import AbstractNotificationAdmin
 from swapper import load_model
 
@@ -41,7 +41,7 @@ class NotificationActionForm(ActionForm):
         for template in NotificationTemplate.objects.all():
             choices.append((template.slug, template.verb))
         self.fields['template'].choices = choices
-    template = forms.ChoiceField(label=_('Notification template'), choices=[], required=False)
+    template = forms.ChoiceField(label=gettext_lazy('Notification template'), choices=[], required=False)
 
 
 class AdminNotifyActionMixin:
@@ -56,7 +56,7 @@ class AdminNotifyActionMixin:
         template = NotificationTemplate.objects.get(slug=template_slug)
         for reciever in queryset:
             reciever.send_templated_notification(template)
-    notify_action.short_description = _("Send notification based on template")
+    notify_action.short_description = gettext_lazy("Send notification based on template")
 
     @property
     def media(self):
